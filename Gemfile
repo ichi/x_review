@@ -9,7 +9,8 @@ end
 gem 'rails', '~> 5.1.2'
 
 # DB
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 
 # Server
 gem 'puma', '~> 3.7'
