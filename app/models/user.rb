@@ -14,7 +14,7 @@
 #
 
 class User < ApplicationRecord
-  devise :rememberable, :trackable
+  devise :rememberable, :trackable, :omniauthable
 
   has_many :authentications, inverse_of: :user
 end

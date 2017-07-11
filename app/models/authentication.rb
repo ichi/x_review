@@ -24,4 +24,20 @@
 
 class Authentication < ApplicationRecord
   belongs_to :user, inverse_of: :authentications
+
+  class << self
+    def from_omniauth(params, user)
+      find_or_initialize_by(provider: params['provider'], uid: params['uid']).tap do |auth|
+        transaction do
+          auth.user ||= user || User.create!
+          auth.assign_attributes(
+            token: params['credentials']['token'],
+            token_expires_at: params['credentials']['expires_at'] && Time.at(params['credentials']['expires_at']).to_datetime,
+            params: params
+          )
+          auth.save! if auth.changed?
+        end
+      end
+    end
+  end
 end
