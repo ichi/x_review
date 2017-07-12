@@ -7,4 +7,14 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = yield
+    header
+      h1 = link_to 'X review', root_path
+      p
+        - if user_signed_in?
+          | User##{current_user.id}
+          = link_to 'Sign out', sign_out_path, method: :delete
+        - else
+          = link_to 'Sign in', user_twitter_omniauth_authorize_path
+      
+    main
+      = yield
