@@ -31,7 +31,7 @@ class Authentication < ApplicationRecord
         transaction do
           auth.user = user || auth.user || User.create!
           auth.user.assign_attributes(
-            name: params['info']['nickname'],
+            name: params['info']['nickname'] || params['info']['name'],
             image_url: params['info']['image'],
           )
           auth.user.save! if auth.user.changed?

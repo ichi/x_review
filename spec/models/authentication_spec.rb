@@ -34,7 +34,7 @@ RSpec.describe Authentication, type: :model do
       subject{ Authentication.from_omniauth(params, user) }
       let(:user){ nil }
 
-      %i(twitter).each do |provider|
+      %i(twitter facebook).each do |provider|
         context "providerが#{provider}のとき" do
           let(:params){ Faker::Omniauth.send(provider).with_indifferent_access }
 

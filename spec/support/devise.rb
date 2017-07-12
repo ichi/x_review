@@ -1,5 +1,5 @@
 module Devise
-  SCOPES = [:administrator, :user]
+  SCOPES = [:user]
 
   module ResourceHelper
     def create_resource(name)

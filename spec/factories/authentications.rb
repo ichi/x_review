@@ -26,7 +26,7 @@
 FactoryGirl.define do
   factory :authentication do
     user
-    provider          { %i(twitter).sample }
+    provider          { %i(twitter facebook).sample }
     uid               { params[:uid] }
     token             { params[:credentials][:token] }
     token_expires_at  { Time.at(params[:credentials][:expires_at]) if params[:credentials][:expires_at] }

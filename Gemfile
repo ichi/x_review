@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # Auth
 gem 'devise'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 # Development
 group :development do
