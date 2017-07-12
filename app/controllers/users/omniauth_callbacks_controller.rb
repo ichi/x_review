@@ -1,7 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Devisable
 
-  %i(twitter facebook).each do |provider|
+  Devise.omniauth_providers.each do |provider|
     define_method provider do
       create
     end

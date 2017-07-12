@@ -27,7 +27,7 @@ class Authentication < ApplicationRecord
 
   class << self
     def from_omniauth(params, user)
-      find_or_initialize_by(provider: params['provider'], uid: params['uid']).tap do |auth|
+      find_or_initialize_by(provider: provider_name(params['provider']), uid: params['uid']).tap do |auth|
         transaction do
           auth.user = user || auth.user || User.create!
           auth.user.assign_attributes(
@@ -44,6 +44,11 @@ class Authentication < ApplicationRecord
           auth.save! if auth.changed?
         end
       end
+    end
+
+    def provider_name(provider)
+      return 'google' if provider == 'google_oauth2'
+      provider
     end
   end
 end
