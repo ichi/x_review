@@ -11,6 +11,8 @@
 #  last_sign_in_ip     :inet
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  name                :string
+#  image_url           :text
 #
 
 require 'rails_helper'
