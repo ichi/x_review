@@ -29,7 +29,7 @@ class Authentication < ApplicationRecord
     def from_omniauth(params, user)
       find_or_initialize_by(provider: provider_name(params['provider']), uid: params['uid']).tap do |auth|
         transaction do
-          auth.user = user || auth.user || User.create!
+          auth.user = user || auth.user || User.new
           auth.user.assign_attributes(
             name: params['info']['nickname'] || params['info']['name'],
             image_url: params['info']['image'],

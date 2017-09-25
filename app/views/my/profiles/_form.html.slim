@@ -1,0 +1,12 @@
+= form_for current_user, url: my_profile_path do |f|
+  = render 'application/form/errors', errors: current_user.errors
+
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  .field
+    = f.label :image_url
+    = f.text_field :image_url
+
+  .actions = f.submit

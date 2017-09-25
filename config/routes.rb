@@ -7,5 +7,9 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :my do
+    resource :profile, only: %i(show edit update destroy)
+  end
+
   root 'root#index'
 end

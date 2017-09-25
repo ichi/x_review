@@ -13,10 +13,10 @@ html
         - if user_signed_in?
           span
             span = image_tag current_user.image_url
-            span = current_user.name
-          = link_to 'Sign out', sign_out_path, method: :delete
+            span = link_to current_user.name, my_profile_path
+          = button_to 'Sign out', sign_out_path, method: :delete
         - else
-          = link_to 'Sign in', sign_in_path
-      
+          = button_to 'Sign in', sign_in_path, method: :get
+
     main
       = yield

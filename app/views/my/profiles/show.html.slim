@@ -1,0 +1,15 @@
+p#notice = notice
+
+h2 profile
+
+h3 = label :user, :name
+= current_user.name
+
+h3 = label :user, :image_url
+= current_user.image_url
+
+= button_to 'Edit', edit_my_profile_path, method: :get
+
+h2 social
+
+p TODO

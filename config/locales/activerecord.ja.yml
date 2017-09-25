@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    attributes: &attributes
+      user:
+        name: ニックネーム
+        image_url: 画像URL
+
+  helpers:
+    label:
+      <<: *attributes
