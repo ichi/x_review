@@ -1,5 +1,5 @@
-= form_for current_user, url: my_profile_path do |f|
-  = render 'application/form/errors', errors: current_user.errors
+= form_for @user, url: my_profile_path do |f|
+  = render 'application/form/errors', errors: @user.errors
 
   .field
     = f.label :name

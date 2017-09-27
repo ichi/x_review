@@ -1,4 +1,6 @@
 class My::ProfilesController < ApplicationController
+  before_action :set_user, only: %i(show edit update destroy)
+
   # GET /my/profile
   # GET /my/profile.json
   def show
@@ -12,12 +14,12 @@ class My::ProfilesController < ApplicationController
   # PATCH/PUT /my/profile.json
   def update
     respond_to do |format|
-      if current_user.update(user_params)
+      if @user.update(user_params)
         format.html { redirect_to my_profile_url, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: my_profile_url }
       else
         format.html { render :edit }
-        format.json { render json: current_user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -25,7 +27,7 @@ class My::ProfilesController < ApplicationController
   # DELETE /my/profile
   # DELETE /my/profile.json
   def destroy
-    current_user.destroy
+    @user.destroy
     respond_to do |format|
       format.html { redirect_to root_url, notice: 'Profile was successfully destroyed.' }
       format.json { head :no_content }
@@ -33,6 +35,10 @@ class My::ProfilesController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.includes(:authentications).find current_user.id
+  end
 
   def user_params
     params.require(:user).permit(:name, :image_url)

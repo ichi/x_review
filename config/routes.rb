@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       get 'sign_in', to: 'sessions#new'
       delete 'sign_out', to: 'sessions#destroy'
     end
+
+    resources :authentications, module: :my, path: '/users/auth', param: :provider, as: :my_authentications, only: %i(destroy)
   end
 
   namespace :my do

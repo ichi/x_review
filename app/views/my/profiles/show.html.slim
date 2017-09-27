@@ -3,13 +3,20 @@ p#notice = notice
 h2 profile
 
 h3 = label :user, :name
-= current_user.name
+= @user.name
 
 h3 = label :user, :image_url
-= current_user.image_url
+= @user.image_url
 
 = button_to 'Edit', edit_my_profile_path, method: :get
 
 h2 social
 
-p TODO
+ul
+  - Devise.omniauth_providers.each do |provider|
+    li
+      p = provider
+      - unless @user.authentications.exists? provider: provider
+        = button_to "連携する", send("user_#{provider}_omniauth_authorize_path"), method: :get
+      - else
+        = button_to '連携を解除する', my_authentication_path(provider: provider), method: :delete
