@@ -20,3 +20,7 @@ ul
         = button_to "連携する", send("user_#{provider}_omniauth_authorize_path"), method: :get
       - else
         = button_to '連携を解除する', my_authentication_path(provider: provider), method: :delete
+
+h2 退会
+
+= button_to 'ユーザー情報を削除する', my_profile_path, method: :delete, data: {confirm: 'ユーザーに関連する情報を全て削除します。復元は出来ません。よろしいですか？'}
