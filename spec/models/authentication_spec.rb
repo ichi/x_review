@@ -34,12 +34,12 @@ RSpec.describe Authentication, type: :model do
       subject{ Authentication.from_omniauth(params, user) }
       let(:user){ nil }
 
-      %i(twitter).each do |provider|
+      Devise.omniauth_providers.each do |provider|
         context "providerが#{provider}のとき" do
           let(:params){ Faker::Omniauth.send(provider).with_indifferent_access }
 
           context 'すでにauthenticationがあるとき' do
-            let(:authentication){ create(:authentication, provider: params['provider'], uid: params['uid']) }
+            let(:authentication){ create(:authentication, provider: Authentication.provider_name(params['provider']), uid: params['uid']) }
 
             before do
               authentication

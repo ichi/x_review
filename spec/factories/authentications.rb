@@ -26,10 +26,10 @@
 FactoryGirl.define do
   factory :authentication do
     user
-    provider          { %i(twitter).sample }
+    provider          { Devise.omniauth_providers.sample }
     uid               { params[:uid] }
     token             { params[:credentials][:token] }
     token_expires_at  { Time.at(params[:credentials][:expires_at]) if params[:credentials][:expires_at] }
-    params            { Faker::Omniauth.send(provider) }
+    params            { Faker::Omniauth.send(Authentication.provider_name provider) }
   end
 end

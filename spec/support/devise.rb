@@ -1,5 +1,5 @@
 module Devise
-  SCOPES = [:administrator, :user]
+  SCOPES = [:user]
 
   module ResourceHelper
     def create_resource(name)
@@ -11,7 +11,7 @@ module Devise
 
   module ControllerMacros
     SCOPES.each do |scope|
-      define_method "login_#{scope}" do
+      define_method "login_#{scope}!" do
         before(:each) do
           @request.env["devise.mapping"] = Devise.mappings[scope]
           resource = create_resource(scope)
@@ -23,7 +23,7 @@ module Devise
 
   module RequestMacros
     SCOPES.each do |scope|
-      define_method "login_#{scope}" do
+      define_method "login_#{scope}!" do
         before(:each) do
           resource = create_resource(scope)
           login_as resource, scope: scope, :run_callbacks => false

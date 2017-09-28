@@ -1,7 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Devisable
 
-  %i(twitter).each do |provider|
+  Devise.omniauth_providers.each do |provider|
     define_method provider do
       create
     end
@@ -20,9 +20,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protected
 
   # The path used when OmniAuth fails
-  # def after_omniauth_failure_path_for(scope)
-  #   super(scope)
-  # end
+  def after_omniauth_failure_path_for(scope)
+    sign_in_path
+  end
 
   def create
     auth_params = request.env['omniauth.auth']

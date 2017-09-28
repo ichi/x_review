@@ -1,0 +1,6 @@
+- if errors.any?
+  article.message.is-danger
+    .message-body
+      ul
+        - errors.full_messages.each do |message|
+          li = message
